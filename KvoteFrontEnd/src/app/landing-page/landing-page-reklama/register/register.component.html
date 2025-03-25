@@ -1,0 +1,26 @@
+<div class="all">
+<div class="main">
+  <h1>Registracija</h1>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="email">Email:</label>
+        <input id="email" type="email" formControlName="email" required />
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input id="password" type="password" formControlName="password" required />
+      </div>
+      <div>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input id="confirmPassword" type="password" formControlName="confirmPassword" required />
+      </div>
+      <div *ngIf="registerForm.errors?.['mismatch']">
+        <p>Passwords do not match.</p>
+      </div>
+      <div *ngIf="loginError" class="error-message">{{ loginError }}</div>
+      <div *ngIf="registerMessage" class="register-message">{{ registerMessage }}</div>
+      <button type="submit" class="forgot-password-btn" [disabled]="!registerForm.valid">Register</button>
+    </form>
+</div>
+<app-footer></app-footer>
+</div>

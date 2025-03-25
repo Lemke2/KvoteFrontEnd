@@ -1,0 +1,96 @@
+.content-container {
+    display: flex;
+    width: 80%;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  
+  .sidebar {
+    flex: 1; /* Takes up 1 part of the flex space */
+    /* Add additional styling as needed */
+  }
+  
+  .main-content {
+    margin-top: 60px;
+    flex: 2; /* Takes up 2 parts of the flex space, making it larger than the sidebar */
+    /* Add additional styling as needed */
+  }
+  
+  table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #f4f4f4;
+    }
+  
+    tr:hover {
+      background-color: #e9e9e9; /* Light gray background on hover */
+      cursor: pointer; /* Change cursor to indicate clickable */
+    }
+    
+    tr:hover td {
+      color: #000;
+    }
+    
+    
+  /* h2 {
+    text-align: center;
+  }   */
+
+
+  @media (max-width: 768px) {
+    .sidebar {
+      position: fixed;
+      display: block;
+      left: -100%; /* Start off-screen */
+      top: 0;
+      height: 100%;
+      width: 75%;
+      transition: left 0.1s ease;
+      z-index: 1000;
+      background-color: #aaa; /* Your chosen background color */
+      padding: 10px; /* Adjust as needed */
+      box-sizing: border-box; /* To include padding in width and height */
+      margin-top: 0;
+    }
+    
+    .sidebar.active {
+      left: 0; /* Slide in */
+      background-color: #ccc;
+      border: 5px solid green;
+      margin-left: 0;
+      padding-top: 80px;
+      overflow-y: auto;
+    }
+  
+    .sidebar,
+    .sidebar.active {
+      box-sizing: border-box;
+    }
+  
+    .close-icon{
+      display: block;
+      position: absolute;
+      margin-top: 20px;
+      top: 0px;
+      right: 10px;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+    }
+  
+    .main-content{
+      margin: auto;
+      padding: 0;
+      margin-top: 80px;
+    }
+  
+  }

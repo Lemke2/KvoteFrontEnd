@@ -1,0 +1,70 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="content-container">
+    <div class="sidebar">
+      <!-- Search Bar Component -->
+      <app-search-bar></app-search-bar>
+      <br>
+      <!-- Smaller Table for Football Leagues -->
+      <app-football-leagues></app-football-leagues>
+    </div>
+
+    <div class="main-content">
+        <table>
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Tip Paketa</th>
+                <th>Trajanje Paketa</th>
+                <th>Tip SB</th>
+                <th>Trajanje SB</th>
+                <th>Telegram</th>
+                <th>Kladionica Uplate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ user.userName }}</td>
+                <td>{{ user.packageType }}</td>
+                <td>{{ user.expirationDate| date: 'mediumDate' }}</td>
+                <td>{{ user.surebetType }}</td>
+                <td>{{ user.surebetExpirationDate| date: 'mediumDate' }}</td>
+                <td>{{ user.telegram }}</td>
+                <td>{{ user.bettingHouse }}</td>
+              </tr>
+            </tbody>
+          </table>
+        
+          <br>
+          <br>
+
+          <form [formGroup]="updateForm" (ngSubmit)="onSubmit(); updateForm.reset()">
+            <div>
+              <label for="packageType">Tip Paketa:</label>
+              <input id="packageType" type="packageType" formControlName="packageType"/>
+            </div>
+            <div>
+              <label for="packageDuration">Trajanje Paketa:</label>
+              <input id="packageDuration" type="packageDuration" formControlName="packageDuration"/>
+            </div>
+            <div>
+              <label for="surebetType">Tip SureBet:</label>
+              <input id="surebetType" type="surebetType" formControlName="surebetType"/>
+            </div>
+            <div>
+              <label for="surebetExpirationDate">Trajanje SureBet:</label>
+              <input id="surebetExpirationDate" type="surebetExpirationDate" formControlName="surebetExpirationDate"/>
+            </div>
+            <div>
+              <label for="telegram">Telegram:</label>
+              <input id="telegram" type="telegram" formControlName="telegram"/>
+            </div>
+            <div>
+              <label for="bettingHouse">Kladionica Uplate:</label>
+              <input id="bettingHouse" type="bettingHouse" formControlName="bettingHouse"/>
+            </div>
+            <button type="submit" [disabled]="!updateForm.valid">Update</button>
+          </form>
+    </div>
+</div>
+    

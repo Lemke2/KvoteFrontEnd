@@ -1,0 +1,13 @@
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchQuery" 
+    (input)="onSearch()" 
+    (blur)="onBlur()" 
+    (focus)="onFocus()" 
+    placeholder="Search matches...">
+    <div class="search-results" *ngIf="showResults">
+      <a *ngFor="let game of searchResults" (click)="navigateToMatch(game)">
+        {{ game.home }} vs {{ game.away }}
+      </a>
+    </div>
+  </div>
+  

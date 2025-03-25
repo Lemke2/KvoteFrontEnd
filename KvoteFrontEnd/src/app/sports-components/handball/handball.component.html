@@ -1,0 +1,103 @@
+<app-nav-bar></app-nav-bar>
+<div class="site-content">
+  <div class="content-container">
+    <div class="sidebar" [class.active]="displaySidebar">
+      <div class="active-sidebar">
+        <app-date-bar></app-date-bar>
+        <app-search-bar></app-search-bar>
+        <br>
+        <!-- Smaller Table for Football Leagues -->
+        <app-football-leagues></app-football-leagues>
+      </div>
+    </div>
+
+  <div class="main-content" (click)="hideSideBar()">
+    <section *ngIf="!sortMode">
+      <div class="sort-buttons">
+        <img src="/assets/images/SortPoLigama.png"  [class.active]="!sortMode">
+        <img src="/assets/images/SortPoVremenu.png" (click)="setSortModeByStartTime()" [class.active]="sortMode">
+      </div>
+    <ng-container *ngIf="leagueMatches['Handball']">
+      <section *ngFor="let league of leagueMatches['Handball']| keyvalue">
+        <h2>{{ league.key }}</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Vreme</th>
+              <th>Timovi</th>
+              <th>1</th>
+              <th>X</th>
+              <th>2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let match of sortMatchesByStartTime(league.value)">
+              <td class="date-column">
+                <a [href]="generateUrl(match, 'Handball')" (click)="navigateToMatch(match, $event)">
+                <div>{{ match.startTime | date: 'dd/MM/yy' }}</div>
+                <div>{{ match.startTime | date: 'HH:mm' }}</div>
+                </a>
+              </td>              
+              <td class="wide-column">
+                <a [href]="generateUrl(match, 'Handball')" (click)="navigateToMatch(match, $event)">
+                <div class="hometeam">{{ match.home }}</div>
+                <div>{{ match.away }}</div>
+              </a>
+              </td>
+              <td (click)="addOddsToTicket(match, 'K1')" [ngClass]="{'selected': isSelected(match, 'K1')}"  class="odds-field">{{ match.odds1 }}</td>
+              <td (click)="addOddsToTicket(match, 'KX')" [ngClass]="{'selected': isSelected(match, 'KX')}"  class="odds-field">{{ match.oddsX }}</td>
+              <td (click)="addOddsToTicket(match, 'K2')" [ngClass]="{'selected': isSelected(match, 'K2')}"  class="odds-field">{{ match.odds2 }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </ng-container>
+    </section>
+
+    
+    <section *ngIf="sortMode">
+      <div class="sort-buttons">
+        <img src="/assets/images/SortPoLigama.png" (click)="setSortModeByLeague()" [class.active]="!sortMode">
+        <img src="/assets/images/SortPoVremenu.png" [class.active]="sortMode">
+      </div>
+      <table class="table-sortmode">
+          <thead>
+            <tr>
+              <th>Vreme</th>
+              <th>Timovi</th>
+              <th>1</th>
+              <th>X</th>
+              <th>2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let match of sortedMatches">
+              <td class="date-column">
+                <a [href]="generateUrl(match.match, 'Handball')" (click)="navigateToMatch(match.match, $event)">
+                <div>{{ match.match.startTime | date: 'dd/MM/yy' }}</div>
+                <div>{{ match.match.startTime | date: 'HH:mm' }}</div>
+              </a>
+              </td>              
+              <td class="wide-column">
+                <a [href]="generateUrl(match.match, 'Handball')" (click)="navigateToMatch(match.match, $event)">
+                <div class="hometeam">{{ match.match.home }}</div>
+                <div>{{ match.match.away }}</div>
+                </a>
+              </td>
+              <td (click)="addOddsToTicket(match.match, 'K1')" [ngClass]="{'selected': isSelected(match, 'K1')}" class="odds-field">{{ match.match.odds1 }}</td>
+              <td (click)="addOddsToTicket(match.match, 'KX')" [ngClass]="{'selected': isSelected(match, 'KX')}" class="odds-field">{{ match.match.oddsX }}</td>
+              <td (click)="addOddsToTicket(match.match, 'K2')" [ngClass]="{'selected': isSelected(match, 'K2')}" class="odds-field">{{ match.match.odds2 }}</td>
+            </tr>
+          </tbody>
+        </table>
+    </section>
+
+  </div>
+
+  <div class="right-sidebar">
+    <app-betting-ticket></app-betting-ticket>
+  </div>
+</div>
+
+<app-footer></app-footer>
+</div>

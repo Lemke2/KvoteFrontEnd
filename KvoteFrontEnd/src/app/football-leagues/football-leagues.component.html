@@ -1,0 +1,27 @@
+<div class="container">
+
+  <ul class="league-list">
+    <li *ngFor="let sport of showOrder" class="league-item">
+      <button (click)="toggleLeaguesDisplay(sport)" class="league-link">{{ getTranslatedSportName(sport) }}</button>
+
+      <ul *ngIf="displayLeagues[sport]" class="sub-league-list">
+        <ng-container *ngFor="let orderedLeague of highestPrioDict[sport]">
+        <ng-container *ngIf="displayLeague(sport, orderedLeague)">
+        <li class="sub-league-item">
+          <button (click)="navigateToLeague(sport, orderedLeague)" class="sub-league-link" [class.selected]="isSelectedLeague(sport, orderedLeague)">
+            {{ orderedLeague }}
+          </button>
+        </li>
+      </ng-container>
+      </ng-container>
+        <li *ngFor="let league of leagueMatches[sport] | keyvalue" class="sub-league-item">
+          <button (click)="navigateToLeague(sport, league.key)" class="sub-league-link" [class.selected]="isSelectedLeague(sport, league.key)">
+          {{ league.key }}
+        </button>
+        </li>
+      </ul>
+
+    </li>
+    </ul>
+
+</div>

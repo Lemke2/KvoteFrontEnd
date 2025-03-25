@@ -1,0 +1,102 @@
+<div class="landing-container">
+  <div class="intro-box">
+    <div class="intro-left">
+      <h1 class="intro-title">Pronađi najbolje kvote, osiguraj najveći dobitak i pobedi kladionicu!</h1>
+      <ul class="intro-text">
+        <li>Pristupi svim kvotama na domaćem tržištu na jednom mestu!</li>
+        <li>Sastavi tiket i uvek odigraj najveću kvotu!</li>
+        <li>Uporedi dobitak i maksimiziraj profit!</li>
+        <li>Pronađi najbolju granicu za košarkaške igrače!</li>
+        <li>Iskoristi prednost matematičkih formula i sigurno zaradi uz arbitražno klađenje</li>
+        <li>Pametniji način klađenja!</li>
+      </ul>
+      <div class="buttons">
+        <button mat-raised-button class="sleek-button" [routerLink]="['/login']">Prijava</button>
+        <button mat-raised-button class="sleek-button" [routerLink]="['/register']">Registracija</button>
+      </div>
+    </div>
+    <div class="intro-right">
+      <img class="intro-img" src="/assets/images/kvoteLandingPageReklama.png" alt="Your image description" />
+    </div>
+  </div>
+  <div class="poredjenje-box">
+    <div class="poredjenje-left">
+      <h2 class="poredjenje-title">Šta je poređenje kvota?</h2>
+      <ul class="poredjenje-text">
+        <li>Usluga poređenja kvota vam omogućava pregled kvota iz svih kladionica koje imamo u ponudi za specifičan meč.</li>
+        <li>Razlike u kvotama za iste igre među kladionicama su često značajne, pogotovo ako sklapate veće tikete.</li>
+        <li>Nemojte da ostavljate pare kladionicama, maksimizirajte vaš profit!</li>
+      </ul>
+      <h2 class="poredjenje-title">Šta je surebet?</h2>
+      <ul class="poredjenje-text">
+        <li>Usluga koju smo kreirali omogućava vam klađenje bez rizika: zarađujete novac bez obzira na ishod sportskog događaja.</li>
+        <li>Da li je to zaista moguće? Da, kroz upotrebu sigurnih opklada (Surebet), koje se izračunavaju koristeći osnovne matematičke formule.</li>
+        <li>Tokom uparivanja kvota za specifičnu utakmicu mi vršimo matematičke operacije i gledamo da li postoji zagarantovani prihod za datu utakmicu.</li>
+      </ul>
+    </div>
+    <div class="poredjenje-right">
+      <img class="poredjenje-img" src="/assets/images/Poredjenje.png" alt="Your image description" />
+      <img class="poredjenje-img" src="/assets/images/Surebet.png" alt="Your image description" />
+    </div>
+  </div>
+  <div class="dostupne-kladionice-box">
+    <h2 class="dostupne-kladionice-title">Dostupne kladionice</h2>
+    <div class="kladionice" *ngFor="let kladionica of listaKladionica">
+        <div class="kladionica">✔️ {{ kladionica }}</div>
+    </div>
+    <p>Kvote se ažuriraju svakih 45s-145s, zavisno od kladionice i trenutnog broja utakmica u ponudi.</p>
+  </div>
+  <div class="uplata-box">
+    <h2> Kako uplatiti nalog? </h2>
+    <p>Registracijom isprobajte besplatnu, probnu, verziju.</p>
+    <p>Uplatom pristupite celokupnoj ponudi sajta</p>
+    <p>Za uplatu se javite na mail: uprava@kvote.rs ili nas kontaktirajte na instagram nalog: <a href="https://www.instagram.com/kvote.rs/">Kvote.rs</a></p>
+    <p>Za uplatu Surebet paketa javite se na mail: uprava@kvote.rs ili nas kontaktirajte na instagram nalog: <a href="https://www.instagram.com/arbitraznokladjenje.srbija/">Arbitražno Klađenje</a></p>
+  </div>
+  <div class="paketi-box">
+    <h2> Paketi </h2>
+    <h3 class="poredjenje">Poređenje kvota</h3>
+    <p>Pristup celokupnoj ponudi sajta</p>
+    <div class="paketi-poredjenje-box">
+        <div class="paketi-singular-box" *ngFor="let plan of plansPoredjenje">
+          <div class="duration">{{ plan.duration }}</div>
+          <div class="price">{{ plan.price }}€</div>
+          <!-- <button [routerLink]="['/login']">Prijavi se</button> -->
+        </div>
+      </div>
+    <h3>Surebets 0-999% </h3>
+    <p>Na telegram vam stižu Surebetovi gde je procenat sigurnog profita do 999%</p>
+    <div class="paketi-poredjenje-box">
+        <div class="paketi-singular-box" *ngFor="let plan of plansSurebets999">
+          <div class="duration">{{ plan.duration }}</div>
+          <div class="price">{{ plan.price }}€</div>
+          <!-- <button [routerLink]="['/login']">Prijavi se</button> -->
+        </div>
+      </div>
+    <h3>Surebets 0-6% </h3>
+    <p>Na telegram vam stižu Surebetovi gde je procenat sigurnog profita do 6%</p>
+    <div class="paketi-poredjenje-box">
+        <div class="paketi-singular-box" *ngFor="let plan of plansSurebets6">
+          <div class="duration">{{ plan.duration }}</div>
+          <div class="price">{{ plan.price }}€</div>
+          <!-- <button [routerLink]="['/login']">Prijavi se</button> -->
+        </div>
+      </div>
+    <h3>Surebets 0-3% </h3>
+    <p>Na telegram vam stižu Surebetovi gde je procenat sigurnog profita do 3%</p>
+    <div class="paketi-poredjenje-box">
+      <div class="paketi-singular-box" *ngFor="let plan of plansSurebets3">
+        <div class="duration">{{ plan.duration }}</div>
+        <div class="price">{{ plan.price }}€</div>
+        <!-- <button [routerLink]="['/login']">Prijavi se</button> -->
+      </div>
+    </div>
+  </div>
+  <div class="api-box">
+    <h1 class="title">Treba ti API?</h1>
+    <p>Pošalji nam email na</p>
+    <p>uprava@kvote.rs</p>
+    <p>i odgovorićemo ti u najkraćem roku.</p>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,166 @@
+html, body{
+  height: 100%;
+  margin: 0;
+}
+
+.site-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-container {
+  flex: 1;
+  display: flex;
+}
+
+.sidebar {
+  flex: 1;
+  margin-left: 12%;
+  margin-top: 80px;
+}
+
+.close-icon {
+  display: none;
+}
+
+.sort-buttons{
+  position: absolute;
+  right: 25%;
+  top: 56px;
+  cursor: pointer;
+  display: flex;
+}
+
+.sort-buttons img{
+  height: 40px;
+  width: 40px;
+  background-color: #ffffff;
+  padding: 10px;
+}
+
+.sort-buttons img.active {
+  background-color: #85c285;
+  border-bottom: 2px solid #04AA6D;
+  height: 42px;
+}
+
+.main-content {
+  flex: 2; 
+  padding-right: 25%;
+  margin-top: 80px;
+  min-height: 100vh; 
+}
+
+.table-sortmode{
+  margin-top: 35px;
+}
+
+table {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  th, td {
+    border: 1px solid #aaa;
+    padding: 8px;
+    text-align: left;
+    background-color: #ffffff;
+  }
+  
+  th {
+    background-color: #85c285;
+    color: #000;
+    border-bottom: 2px solid #04AA6D;
+  }
+
+  tr:hover {
+    cursor: pointer; /* Change cursor to indicate clickable */
+  }
+  
+  tr:hover td {
+    font-weight:  600;
+    background-color: #c7f3c7;
+  }
+  
+  .wide-column {
+    width: 65%;
+    padding: 2px 3px;
+    }
+    
+  .date-column{
+    padding: 2px 3px;
+  }
+  .hometeam{
+    padding-bottom: 2px;
+  }
+
+  td a {
+    display: block;     /* Make the anchor fill the cell */
+    width: 100%;        /* Take full width of the cell */
+    height: 100%;       /* Take full height of the cell */
+    text-decoration: none; /* Optional: Removes underline from links */
+    color: inherit;     /* Optional: Inherit text color from parent */
+  }
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    display: block;
+    left: -100%; /* Start off-screen */
+    top: 0;
+    height: 100%;
+    width: 75%;
+    transition: left 0.15s ease;
+    z-index: 1000;
+    background-color: #aaa; /* Your chosen background color */
+    padding: 10px; /* Adjust as needed */
+    box-sizing: border-box; /* To include padding in width and height */
+    margin-top: 0;
+  }
+  
+  .sidebar.active {
+    left: 0; /* Slide in */
+    background-color: #ccc;
+    border: 5px solid green;
+    margin-left: 0;
+    padding-top: 80px;
+    overflow-y: auto;
+  }
+
+  .close-icon{
+    display: block;
+    position: absolute;
+    margin-top: 20px;
+    top: 0px;
+    right: 10px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+  }
+
+  .main-content{
+    margin: auto;
+    padding: 0;
+    margin-top: 100px;
+  }
+
+  h2{
+    text-align: center;
+  }
+
+  .sort-buttons{
+    position: absolute;
+    right: 0;
+    top: 56px;
+  }
+
+  .table-sortmode{
+    margin-top: 20px;
+  }
+
+  .right-sidebar{
+    z-index: 9000;
+  }
+}

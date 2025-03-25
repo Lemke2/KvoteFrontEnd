@@ -1,0 +1,327 @@
+.betting-icon-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .betting-icon-container img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(3); /* Adjust scale value to control intensity of the pulse */
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .pulsing {
+    animation: pulse 1s ease-out;
+  }
+  
+  .betting-ticket {
+    width: 350px;
+    position: fixed;
+    right: 0;
+    top: 58px;
+    bottom: 0;
+    padding-top: 40px;
+    overflow-y: auto;
+    background: #aaa;
+    box-shadow: -2px 0 5px rgba(133, 194, 133, 1);
+    z-index: 9000;
+  }
+  
+  .close-icon{
+    position: absolute;
+    top: 0;
+    right: -2px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+  }
+
+  .betting-ticket .close-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .matches-section, .odds-section {
+    border-radius: 5px;
+    color: #fff;
+  }
+
+  .matches-section {
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #85c285;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .match-box {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    background-color: #197319;
+  }
+
+  .matches-section ul,
+  .matches-section li,
+  .odds-section ul,
+  .odds-section li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .delete-match {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    padding: 5px;
+    color: #ffffff; /* White text color */
+    font-weight: bold;
+  }
+  
+  .betting-game {
+    display: block;
+    font-size: 0.8em;
+    color: #fff;
+    margin-top: 5px;
+    height: 50%;
+  }
+  
+  .match-box:hover {
+    background-color: #528b52;
+  }
+
+  .match-box .delete-match:hover{
+    background-color:#ff3333;
+  }
+
+  .odds-section ul li.invalid-odds .info .line {
+    color: #fa2f2f;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+  
+  .odds-section img {
+    width: 100%;
+    height: 80px;
+    position: relative;
+    display: block;
+  }
+  
+  .image-container {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .image-container:hover{
+    font-weight: 600;
+  }
+
+  .image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.6) 70%, transparent 90%);
+    z-index: 1;
+  }
+  
+  .selected-house {
+    border: 4px solid #85c285;
+    font-weight: 600;
+  }
+
+  .info {
+    position: absolute;
+    top: 10%;
+    left: 2%;
+    color: #eee;
+    z-index: 2;
+  }
+
+  .info .line {
+    display: block; /* Makes each line of text start on a new line */
+    text-align: left; /* Aligns text to the left */
+    padding-bottom: 2px;
+  }
+  
+  .odds-section{
+    overflow-y: auto;
+    padding: 0;    
+  }
+
+  .matches-section ul, .odds-section ul {
+    padding: 0;
+    list-style: none;
+  }
+  
+  .matches-section li {
+    margin-bottom: 5px;
+  }
+
+  .matches-section li:last-child {
+    margin-bottom: 0;
+  }
+
+  
+  .matches-section::-webkit-scrollbar, .odds-section::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .matches-section::-webkit-scrollbar-thumb, .odds-section::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+  
+  .matches-section::-webkit-scrollbar-thumb:hover, .odds-section::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  .betting-ticket-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .clear-ticket-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .clear-ticket-btn:hover {
+    background-color: #ff3333;
+  }
+
+  .betting-amount-input{
+    display: flex;
+  }
+
+  .betting-amount-input input{
+    width: 70px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .betting-amount-input button{
+    cursor: pointer;
+    background-color: #e7e7e7;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 0 2px;
+  }
+
+  .betting-amount-input button:hover {
+    background-color: #d4d4d4;
+  }
+
+  .nan-odds{
+    color: red;
+  }
+
+  .betting-ticket-footer{
+    padding: 2px;
+    margin-top: 13px;
+    margin-bottom: 10px;
+  }
+
+@media (max-width: 768px) {
+  
+  .betting-ticket {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    width: 80%;
+    max-width: 320px;
+    transition: right 0.1s ease;
+    border: 3px solid green;
+    background-color: #fff;
+    overflow-y: auto;
+    padding: 0;
+    padding-top: 30px;
+    border-radius: 0;
+    z-index: 9000;
+  }
+
+  .close-icon{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+    z-index: 9900;
+  }
+
+  .betting-ticket .close-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .matches-section{
+    max-height: 250px;
+    background-color: #fff;
+    border: none;
+  }
+
+  .matches-section, .match-box {
+    padding: 0;
+    margin: 0;
+  }
+
+  .name{
+    margin-left: 5px;
+    font-size: 14px;
+  }
+
+  .betting-game{
+    font-size: 14px;
+    margin-left: 5px;
+  }
+
+  .odds-section{
+    max-height: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .betting-ticket-footer{
+    padding: 2px;
+    padding-top: 0px;
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    z-index: 9900;
+  }
+
+.matches-section ul,
+.matches-section li,
+.odds-section ul,
+.odds-section li {
+  margin: 0;
+  padding: 0;
+}
+
+  
+}

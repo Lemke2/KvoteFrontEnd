@@ -1,0 +1,19 @@
+<div class="all">
+  <div class="main">
+    <h1>Prijava</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="email">Email:</label>
+          <input id="email" type="email" formControlName="email" required />
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input id="password" type="password" formControlName="password" required />
+        </div>
+        <div *ngIf="loginError" class="error-message">{{ loginError }}</div>
+        <button class="login-btn" [disabled]="!loginForm.valid">Log In</button>
+      </form>
+      <button class="forgot-password-btn" [routerLink]="['/forgottenPassword']">Zaboravljena šifra</button>
+  </div>
+  <app-footer></app-footer>
+</div>

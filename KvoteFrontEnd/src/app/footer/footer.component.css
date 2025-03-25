@@ -1,0 +1,25 @@
+.header {
+    background-color: #197319; /* Dark background */
+    text-align: center;
+    display: flex;
+    min-height: 40px;
+    color: white;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+  
+  .header .container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+  }
+  
+  .header p {
+    margin: auto;
+    font-size: 1.2em; /* Slightly smaller font size for the subtitle */
+  }
+
+  .email-address {
+    font-weight: 550;
+    /* Add any additional styles you want for the email address here */
+  }

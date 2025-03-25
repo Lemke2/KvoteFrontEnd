@@ -1,0 +1,92 @@
+<app-nav-bar></app-nav-bar>
+<div class="site-content">
+<div class="content-container">
+  <div class="sidebar" [class.active]="displaySidebar">
+    <div class="active-sidebar">
+      <app-date-bar></app-date-bar>
+      <app-search-bar></app-search-bar>
+      <br>
+      <!-- Smaller Table for Football Leagues -->
+      <app-football-leagues></app-football-leagues>
+    </div>
+  </div>
+
+  <div class="main-content" (click)="hideSideBar()">
+    <section *ngFor="let sport of orderedSports">
+    <ng-container *ngIf="displaySport(sport)">
+      <section *ngFor="let league of GetLeagues(sport)">
+        <div class="league-name"><h2>{{getTranslatedSportName(sport)}} | {{ league }}</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Vreme</th>
+              <th>Timovi</th>
+              <th *ngIf="sport !== 'NFL' && sport !== 'BasketballPlayers'">1</th>
+              <th *ngIf="sport !== 'NFL' && sport !== 'BasketballPlayers' && sport !== 'Tennis'">X</th>
+              <th *ngIf="sport !== 'NFL' && sport !== 'BasketballPlayers'">2</th>
+              <th *ngIf="sport === 'NFL'">FTOT1</th>
+              <th *ngIf="sport === 'NFL'">FTOT2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let match of sortMatchesByStartTime(leagueMatches[sport][league])">
+
+              <td class="date-column">
+                <a [href]="generateUrl(match, sport)" (click)="navigateToMatch(match, $event)">
+                <div>{{ match.startTime | date: 'dd/MM/yy' }}</div>
+                <div>{{ match.startTime | date: 'HH:mm' }}</div>
+                </a>
+              </td>
+
+              <td class="wide-column">
+                <a [href]="generateUrl(match, sport)" (click)="navigateToMatch(match, $event)">
+                <div class="hometeam">{{ match.home }}</div>
+                <div>{{ match.away }}</div>
+                </a>
+                </td>
+              
+              <td *ngIf="sport !== 'NFL' && sport !== 'BasketballPlayers'" 
+                  [ngClass]="{'selected': isSelected(match, 'K1')}" 
+                  (click)="addOddsToTicket(match, 'K1')" 
+                  class="odds-field">{{ match.odds1 }}
+               </td>
+
+              <td *ngIf="sport !== 'NFL' && sport !== 'BasketballPlayers' && sport !== 'Tennis'" 
+                  [ngClass]="{'selected': isSelected(match, 'KX')}"
+                  (click)="addOddsToTicket(match, 'KX')" 
+                  class="odds-field">{{ match.oddsX }}
+                </td>
+
+              <td *ngIf="sport !== 'NFL' && sport !== 'BasketballPlayers'" 
+                  [ngClass]="{'selected': isSelected(match, 'K2')}" 
+                  (click)="addOddsToTicket(match, 'K2')" 
+                  class="odds-field">{{ match.odds2 }}
+                </td>
+
+              <td *ngIf="sport === 'NFL'" 
+                  [ngClass]="{'selected': isSelected(match, 'FTOT1')}" 
+                  (click)="addOddsToTicket(match, 'FTOT1')" 
+                  class="odds-field">{{ match.ftot1 }}
+                </td>
+              <td *ngIf="sport === 'NFL'" 
+                  [ngClass]="{'selected': isSelected(match, 'FTOT2')}" 
+                  (click)="addOddsToTicket(match, 'FTOT2')"
+                  class="odds-field">{{ match.ftot2 }}
+                </td>
+                
+            </tr>
+          </tbody>
+        </table></div>
+      </section>
+    </ng-container>
+    </section>
+    
+  </div>
+
+  <div class="right-sidebar">
+    <app-betting-ticket></app-betting-ticket>
+  </div>
+</div>
+
+<app-footer></app-footer>
+</div>

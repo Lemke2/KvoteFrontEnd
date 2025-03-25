@@ -1,0 +1,75 @@
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 75%; /* You can adjust this value if you want to limit the width */
+    margin: 0 auto;
+  }
+  
+  .content-container {
+    width: 50%; /* Adjust the width of the content container */
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 150px;
+  }
+  
+  .image-container {
+    width: 50%; /* Adjust the width of the image container */
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* To preserve the aspect ratio of the image while filling the container */
+  }
+  
+  p {
+    padding-bottom: 10px;
+    font-size: 1.5rem;
+  }
+  
+  h1{
+    padding-bottom: 20px;
+    font-size: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center; /* Change from 'space-between' to 'center' */
+    gap: 1rem; /* Add gap between the buttons */
+  }
+
+  button{
+    width: 150px;
+    height: 35px;
+    border-radius: 6px;
+  }
+
+
+
+@media (max-width: 768px) {
+
+  .main-container{
+    display: block;
+  }
+
+  .content-container{
+    padding: 0;
+    margin: auto;
+    padding-bottom: 40px;
+    width: 100%;
+    padding-top: 15px;
+  }
+
+  .image-container {
+    width: 100%; /* Adjust the width of the image container */
+  }
+
+  h1{
+    font-size: 40px;
+    line-height: 1;
+  }
+
+}

@@ -1,0 +1,7 @@
+<div class="date-bar">
+    <button (click)="setDateFilter('halfday')" [ngClass]="{'active': selectedFilter === 'halfday'}">12H</button>
+    <button (click)="setDateFilter('today')" [ngClass]="{'active': selectedFilter === 'today'}">24H</button>
+    <button (click)="setDateFilter('3days')" [ngClass]="{'active': selectedFilter === '3days'}">72H</button>
+    <button (click)="setDateFilter('all')" [ngClass]="{'active': selectedFilter === 'all'}">Sve</button>
+  </div>
+  

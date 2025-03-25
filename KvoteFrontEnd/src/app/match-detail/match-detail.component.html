@@ -1,0 +1,111 @@
+<app-nav-bar></app-nav-bar>
+<div class="site-content">
+<div class="content-container">
+  <div class="sidebar" [class.active]="displaySidebar">
+    <div class="active-sidebar">
+      <img src="/assets/images/close_w.png" alt="Close-Sidebar" class="close-icon-sidebar" (click)="hideSideBar()"/>
+      <app-date-bar></app-date-bar>
+      <app-search-bar></app-search-bar>
+      <br>
+      <!-- Smaller Table for Football Leagues -->
+      <app-football-leagues></app-football-leagues>
+    </div>
+  </div>
+
+    <div class="main" *ngIf="match"  (click)="hideSideBar()">
+      <div class="match-metadata">
+        <img src="/assets/images/close_w.png" alt="Close" class="close-icon" (click)="navigateBack()"/>
+        <h1>{{ match.home }} vs {{ match.away }}</h1>
+        <p>{{ match.startTime | date: 'medium' }}</p>
+        <p>{{ match.league}}</p>
+      </div>
+      
+      <div class="table-responsive"> 
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="MaxBet"><img src="assets/images/kladionice/MAXB_u.png" alt="MaxBet"/></th>
+            <th class="Mozzart"><img src="assets/images/kladionice/MOZZ_u.png" alt="Mozzart"/></th>
+            <th class="Admiral"><img src="assets/images/kladionice/MILL_ADM_u.png" alt="Admiral"/></th>
+            <th class="Meridian"><img src="assets/images/kladionice/MERI_u.png" alt="Meridian"/></th>
+            <th class="BalkanBet"><img src="assets/images/kladionice/BALK_u.png" alt="BalkanBet"/></th>
+            <th class="BetOle"><img src="assets/images/kladionice/BTOL_u.png" alt="BetOle"/></th>
+            <th class="BrazilBet"><img src="assets/images/kladionice/BRAZIL_u.png" alt="BrazilBet"/></th>
+            <th class="Merkur"><img src="assets/images/kladionice/MRKR_u.png" alt="Merkur"/></th>
+            <th class="OktagonBet"><img src="assets/images/kladionice/OKTG_u.png" alt="OktagonBet"/></th>
+            <th class="PinnBet"><img src="assets/images/kladionice/PINN_u.png" alt="PinnBet"/></th>
+            <th class="PlanetWin"><img src="assets/images/kladionice/P365_u.png" alt="PlanetWin"/></th>
+            <th class="SoccerBet"><img src="assets/images/kladionice/SOCC_u.png" alt="SoccerBet"/></th>
+            <th class="SuperBet"><img src="assets/images/kladionice/SUPB_u.png" alt="SupperBet"/></th>
+            <th ></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let orderedKey of orderedGroupings">
+            <tr class='grouping-row' (click)="toggleSingleGrouping(orderedKey)">
+              <td colspan="15">{{ orderedKey }}</td>
+            </tr>
+            <ng-container *ngIf="toggleGroupings[orderedKey]">
+              <ng-container *ngFor="let key of getObjectKeys(orderedKey)">
+                <tr class="subgroup-row">
+                  <td colspan="15" class="clickable-cell" (click)="toggleSingleBettingGame(orderedKey, key)">{{ key }}</td>
+                </tr>
+                <ng-container *ngIf="toggleGames[orderedKey][key]">
+                  <ng-container *ngFor="let odds of getOdds(orderedKey, key)">
+                    
+                    <ng-container *ngIf="isComplexBetType(odds)">
+                      <ng-container *ngFor="let betValue of getHandicapValues(odds)| keyvalue">
+                        <tr class="odds-row" [ngClass]="{'selected': isSelected(match, odds)  && selectedLimit === betValue.key}" (click)="addComplexOddsToTicket(odds, betValue.key)">
+                          <td>{{ odds }} ({{betValue.key}})</td>
+                          <ng-container *ngFor="let houseOdds of betValue.value; let i = index">
+                            <td [ngClass]="{'highlight-odds': getHighestOddsComplexBetType(betValue.value) === i}">{{ formatOdds(houseOdds) }}</td>
+                          </ng-container>
+                          <td>{{ odds }} ({{betValue.key}})</td>
+                        </tr>
+                      </ng-container>
+                    </ng-container>
+
+                    <ng-container *ngIf="!isComplexBetType(odds)">
+                      <tr class="odds-row" [ngClass]="{'selected': isSelected(match, odds)}"  (click)="addOddsToTicket(odds)">
+                        <td>{{ odds }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'MaxBet'}">{{ GetOdds('MaxBet', odds) }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'Mozzart'}" >{{ GetOdds('Mozzart', odds) }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'Admiral'}">{{ GetOdds('Admiral', odds) }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'Meridian'}">{{ GetOdds('Meridian', odds) }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'BalkanBet'}">{{ GetOdds('BalkanBet', odds) }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'BetOle'}">{{ GetOdds('BetOle', odds) }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'BrazilBet'}">{{ GetOdds('BrazilBet', odds) }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'Merkur'}">{{ GetOdds('Merkur', odds) }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'OktagonBet'}">{{ GetOdds('OktagonBet', odds) }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'PinnBet'}">{{ GetOdds('PinnBet', odds) }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'PlanetWin'}">{{ GetOdds('PlanetWin', odds) }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'SoccerBet'}">{{ GetOdds('SoccerBet', odds) }}</td>
+                        <td [ngClass]="{'highlight-odds': getHighestOddsBettingHouse(odds) === 'SuperBet'}">{{ GetOdds('SuperBet', odds) }}</td>
+                        <td>{{ odds }}</td>
+                      </tr>
+                    </ng-container>
+                    
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </tbody>
+        
+        
+      </table></div>
+        
+      
+    </div>
+
+    <div class="right-sidebar">
+      <app-betting-ticket></app-betting-ticket>
+    </div>
+
+</div>
+
+<app-footer></app-footer>
+</div>
+
+

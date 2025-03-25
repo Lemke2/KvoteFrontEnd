@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+p{
+    font-size: 18px;
+}
+html, body { height: 100%; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    /* background-color: 	#f7f7f7; */
+    background-image: url('assets/images/background.jpg');
+    background-repeat: repeat;
+    background-attachment: fixed;
+}

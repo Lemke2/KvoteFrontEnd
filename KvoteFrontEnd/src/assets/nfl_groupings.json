@@ -1,0 +1,58 @@
+{
+    "Sve": {
+        "Konacan ishod uklj. produzetke": {
+            "FTOT1": "",
+            "FTOT2": ""
+        },
+        "Konacan ishod 1. poluvreme": {
+            "p11": "",
+            "p1X": "",
+            "p12": ""
+        },
+        "Poluvreme - kraj": {
+            "pk11": "",
+            "pk1x": "",
+            "pk12": "",
+            "pkx1": "",
+            "pkxx": "",
+            "pkx2": "",
+            "pk21": "",
+            "pk2x": "",
+            "pk22": ""
+        },
+        "Ukupno Poena Vise":{
+            "UG+": ""
+        },
+        "Ukupno Poena Manje":{
+            "UG-": ""
+        },
+        "Ukupno Poluvreme Poena Vise":{
+            "P+": ""
+        },
+        "Ukupno Poluvreme Poena Manje":{
+            "P-": ""
+        },
+        "Hendikep Domacin": {
+            "H1": ""
+        },
+        "Hendikep Gost": {
+            "H2": ""
+        },
+        "Mix Igre":{
+            "1&-" : "",
+            "1&+" : "",
+            "X&-" : "",
+            "X&+" : "",
+            "2&-" : "",
+            "2&+" : ""
+        },
+        "Domacin Poeni":{
+            "D+" : "",
+            "D-" : ""
+        },
+        "Gost Poeni":{
+            "G+" : "",
+            "G-" : ""
+        }
+    }
+}

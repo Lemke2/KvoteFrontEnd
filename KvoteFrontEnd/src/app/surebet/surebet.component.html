@@ -1,0 +1,125 @@
+<app-nav-bar></app-nav-bar>
+<div class="site-content">
+<div class="content-container">
+  <div class="sidebar" [class.active]="displaySidebar">
+    <div class="active-sidebar">
+      <app-date-bar></app-date-bar>
+      <app-search-bar></app-search-bar>
+      <br>
+      <!-- Smaller Table for Football Leagues -->
+      <app-football-leagues></app-football-leagues>
+    </div>
+  </div>
+
+    <div class="main" *ngIf="match" (click)="hideSideBar()">
+      <div class="match-metadata">
+        <img src="/assets/images/close_w.png" alt="Close" class="close-icon" (click)="navigateBack()"/>
+        <h1>{{ match.home }} vs {{ match.away }}</h1>
+        <p>{{ match.startTime | date: 'medium' }}</p>
+        <p>{{ match.league}}</p>
+      </div>
+      
+      <div class="table-responsive"> 
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="MaxBet" style="background-color: #fff;"><img src="assets/images/kladionice/MAXB_u.png" alt="MaxBet"/></th>
+            <th class="Mozzart" style="background-color: #1b1e43;"><img src="assets/images/kladionice/MOZZ_u.png" alt="Mozzart"/></th>
+            <th class="Admiral" style="background-color: #012156;"><img src="assets/images/kladionice/MILL_ADM_u.png" alt="Admiral"/></th>
+            <th class="Meridian" style="background-color: #b53b36;"><img src="assets/images/kladionice/MERI_u.png" alt="Meridian"/></th>
+            <th class="BalkanBet" style="background-color: #185833;"><img src="assets/images/kladionice/BALK_u.png" alt="BalkanBet"/></th>
+            <th class="BetOle" style="background-color: #000;"><img src="assets/images/kladionice/BTOL_u.png" alt="BetOle"/></th>
+            <th class="BrazilBet" style="background-color: #000;"><img src="assets/images/kladionice/BRAZIL_u.png" alt="BrazilBet"/></th>
+            <th class="Merkur" style="background-color: #1b1e43;"><img src="assets/images/kladionice/MRKR_u.png" alt="Merkur"/></th>
+            <th class="OktagonBet" style="background-color: #121415;"><img src="assets/images/kladionice/OKTG_u.png" alt="OktagonBet"/></th>
+            <th class="PinnBet" style="background-color: #aaabac;"><img src="assets/images/kladionice/PINN_u.png" alt="PinnBet"/></th>
+            <th class="PlanetWin" style="background-color: #000;"><img src="assets/images/kladionice/P365_u.png" alt="PlanetWin"/></th>
+            <th class="SoccerBet" style="background-color: #000;"><img src="assets/images/kladionice/SOCC_u.png" alt="SoccerBet"/></th>
+            <th class="SuperBet" style="background-color: #fff;"><img src="assets/images/kladionice/SUPB_u.png" alt="SuperBet"/></th>
+            <th ></th>
+          </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let surebet of match['bettingHouses']; let i = index">
+              <tr class="grouping-row" (click)="selectSurebet(i, $event)">
+                <td colspan="15">
+                  <span [ngClass]="{'expired': calculateProfitMargin(surebet['odds']) < 0}">
+                    <span *ngIf="calculateProfitMargin(surebet['odds']) < 0">SUREBET EXPIRED</span>
+
+                    {{ calculateProfitMargin(surebet['odds']) | number:'1.2-2'}}%
+                    : {{ surebet.fieldNames.join(' ') }}
+                  </span>
+                </td>
+                
+                </tr>
+              
+              <ng-container *ngFor="let oddsEntry of surebet['odds'] | keyvalue">
+                <tr class="odds-row">
+                  <td> {{ oddsEntry.key }} </td>
+                  <td [ngClass]="{'highlight-odds': isHighestOddsOfGroup(surebet['odds'][oddsEntry.key], 0)}">{{ surebet['odds'][oddsEntry.key][0] }}</td>
+                  <td [ngClass]="{'highlight-odds': isHighestOddsOfGroup(surebet['odds'][oddsEntry.key], 1)}">{{ surebet['odds'][oddsEntry.key][1] }}</td>
+                  <td [ngClass]="{'highlight-odds': isHighestOddsOfGroup(surebet['odds'][oddsEntry.key], 2)}">{{ surebet['odds'][oddsEntry.key][2] }}</td>
+                  <td [ngClass]="{'highlight-odds': isHighestOddsOfGroup(surebet['odds'][oddsEntry.key], 3)}">{{ surebet['odds'][oddsEntry.key][3] }}</td>
+                  <td [ngClass]="{'highlight-odds': isHighestOddsOfGroup(surebet['odds'][oddsEntry.key], 4)}">{{ surebet['odds'][oddsEntry.key][4] }}</td>
+                  <td [ngClass]="{'highlight-odds': isHighestOddsOfGroup(surebet['odds'][oddsEntry.key], 5)}">{{ surebet['odds'][oddsEntry.key][5] }}</td>
+                  <td [ngClass]="{'highlight-odds': isHighestOddsOfGroup(surebet['odds'][oddsEntry.key], 6)}">{{ surebet['odds'][oddsEntry.key][6] }}</td>
+                  <td [ngClass]="{'highlight-odds': isHighestOddsOfGroup(surebet['odds'][oddsEntry.key], 7)}">{{ surebet['odds'][oddsEntry.key][7] }}</td>
+                  <td [ngClass]="{'highlight-odds': isHighestOddsOfGroup(surebet['odds'][oddsEntry.key], 8)}">{{ surebet['odds'][oddsEntry.key][8] }}</td>
+                  <td [ngClass]="{'highlight-odds': isHighestOddsOfGroup(surebet['odds'][oddsEntry.key], 9)}">{{ surebet['odds'][oddsEntry.key][9] }}</td>
+                  <td [ngClass]="{'highlight-odds': isHighestOddsOfGroup(surebet['odds'][oddsEntry.key], 10)}">{{ surebet['odds'][oddsEntry.key][10] }}</td>
+                  <td [ngClass]="{'highlight-odds': isHighestOddsOfGroup(surebet['odds'][oddsEntry.key], 11)}">{{ surebet['odds'][oddsEntry.key][11] }}</td>
+                  <td>{{ oddsEntry.key }}</td>
+                </tr>
+              </ng-container>
+            </ng-container>
+        </tbody>
+        
+        
+      </table></div>
+        
+      
+    </div>
+
+
+    <img src="/assets/images/betting-ticket.png" alt="Betting Ticket" class="betting-ticket-image" (click)="toggleBettingTicket()"/>
+      <div class="betting-ticket-wrapper" *ngIf="showBettingTicket">
+        <img src="/assets/images/close_w.png" alt="Close" class="close-icon-surebet-ticket" (click)="toggleBettingTicket()"/>
+        <div class="right-sidebar">
+          <div class="betting-ticket">
+            <table class="ticket-table">
+              <thead>
+                <tr>
+                  <th>Igra</th>
+                  <th>Kvota</th>
+                  <th>Ulog</th>
+                  <th>D</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let field of selectedSurebet.requestedFields">
+                  <td>{{ field }}</td>
+                  <td><input type="number" class="input-number" [(ngModel)]="selectedSurebet.editableOdds[field]" (ngModelChange)="setOdds(field, $event)" /></td>
+                  <td>
+                    <input type="number" class="input-number" [ngModel]="getStake(field)" (ngModelChange)="setStake(field, $event)"/>
+                  </td>
+                  
+                  <td>{{ CalculateWinnings(field) | number:'1.2-2' }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="ticket-footer">
+              <input type="number" [(ngModel)]="totalStake" (ngModelChange)="setStakesAndWinnings()"/>
+              <button (click)="clearTicket()">Clear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    
+
+</div>
+<app-footer></app-footer>
+</div>
+
+

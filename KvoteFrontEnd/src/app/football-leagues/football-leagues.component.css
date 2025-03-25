@@ -1,0 +1,67 @@
+.container {
+  width: 70%;
+  margin-left: -1%;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.league-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.league-item {
+  margin-bottom: 5px;
+}
+
+.league-link, .sub-league-link {
+  width: 100%;
+  display: block; /* Make buttons take the full width */
+  padding: 10px 15px; /* Padding inside buttons */
+  text-align: center; /* Align text to the left */
+  background-color: #ffffff; /* Button background color */
+  color: #333; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 3px; /* Rounded corners */
+  text-decoration: none; /* Remove underline from links */
+  cursor: pointer; /* Cursor to indicate clickable */
+  transition: background-color 0.3s; /* Smooth background transition */
+}
+
+.league-link{
+  height: 40px;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+/* .sub-league-link{
+  height: 30px;
+} */
+
+.league-link:hover, .sub-league-link:hover {
+  /* Hover effect */
+  background-color: #eaeaea; /* Slightly darker background on hover */
+}
+
+.sub-league-list {
+  padding-left: 20px; /* Indent sub-leagues */
+}
+
+.sub-league-item {
+  margin-bottom: 3px; /* Smaller space between sub-leagues */
+}
+
+.sub-league-link.selected {
+  background-color: #c7f3c7; /* Example: blue background */
+  /* Add more styles as needed */
+}
+
+
+@media (max-width: 768px) {
+  .container{
+    width: 100%;
+  }
+}

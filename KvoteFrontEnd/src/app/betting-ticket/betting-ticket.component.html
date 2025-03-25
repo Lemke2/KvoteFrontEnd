@@ -1,0 +1,49 @@
+<div class="betting-icon-container">
+  <img src="/assets/images/betting-ticket.png" alt="Betting Ticket" [ngClass]="{'pulsing': animationActive}" (click)="toggleBettingTicket()"/>
+  <div class="betting-ticket" *ngIf="showBettingTicket">
+    <img src="/assets/images/close_w.png" alt="Close" class="close-icon" (click)="toggleBettingTicket()"/>
+      <div class="matches-section">
+          <ul>
+            <li *ngFor="let oddsItem of selectedOdds" (click)="navigateToMatch(oddsItem.matchUrl, oddsItem.thisMatch)" class="match-box">
+              <div class="name"> {{ oddsItem.thisMatch.home }} vs {{ oddsItem.thisMatch.away }} </div>
+              <span class="betting-game">{{ oddsItem.limit !== 'a' ? (oddsItem.bettingGame + ' (' + oddsItem.limit + ')') : oddsItem.bettingGame }}</span>
+              <span class="betting-game" [ngClass]="{'nan-odds': oddsAreNaN(oddsItem.oddsByHouse)}">{{getSortedSingleOdds(oddsItem.oddsByHouse)}}</span>
+              <span class="delete-match" (click)="deleteOneBet(oddsItem);$event.stopPropagation();">X</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="betting-ticket-footer">
+          <button class="clear-ticket-btn" (click)="clearTicket()">Isprazni</button>
+        
+          <div class="betting-amount-input">
+            <button (click)="decreaseAmount()">-</button>
+            <input type="number" [(ngModel)]="betAmount"/>
+            <button (click)="increaseAmount()">+</button>
+          </div>
+        </div>
+
+        <div class="odds-section">
+          <ul>
+            <li *ngFor="let pair of getSortedCumulativeOdds()"
+              [ngClass]="{'
+                invalid-odds': isInvalidOdds(pair[0]),
+                'selected-house': pair[0] === selectedHouse
+              }">
+              <div class="image-container" (click)="displayBettingHouse(pair[0])">
+                <img [src]="bettingHouseImages[pair[0]]" [alt]="pair[0]"/>
+                <div class="info">
+                  <span class="line bettinghouse">{{ pair[0] }}</span>
+                  <span class="line odds-value">Kvota: {{ pair[1] | number:'1.2-2' }}</span>
+                  <span class="line dobitak">Dobitak: {{ calculateModifiedOdds(pair[0], pair[1] * betAmount) | number: '.2-2'}} rsd</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      
+    
+        
+    </div>      
+</div>
+
