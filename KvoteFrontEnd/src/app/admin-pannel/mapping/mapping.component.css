@@ -1,0 +1,105 @@
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: #f8f9fa;
+color: #333;
+padding: 20px;
+}
+
+.main {
+max-width: 100%;
+margin: 0 auto;
+background: white;
+border-radius: 12px;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+padding: 30px;
+}
+
+.instructions{
+margin: 0 auto;
+text-align: center;
+list-style-position: inside;
+}
+
+.upload-section {
+display: flex;
+gap: 30px;
+margin-bottom: 30px;
+}
+
+.upload-box {
+flex: 1;
+background: #f8f9fa;
+border: 2px dashed #dee2e6;
+border-radius: 10px;
+padding: 25px;
+text-align: center;
+transition: all 0.3s ease;
+}
+
+.upload-box:hover {
+border-color: #4dabf7;
+background-color: #e7f5ff;
+}
+
+.upload-box h3 {
+color: #2c3e50;
+margin-bottom: 15px;
+}
+
+.compare-btn {
+display: block;
+width: 200px;
+margin: 30px auto;
+padding: 12px;
+background: #20c997;
+color: white;
+border: none;
+border-radius: 6px;
+font-size: 16px;
+font-weight: 500;
+cursor: pointer;
+transition: background 0.3s;
+}
+
+.compare-btn:hover {
+background: #12a27a;
+}
+
+.comparison-section {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.mapping-display {
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    width: 50%;
+    min-height: 150px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.mapping-display h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.mapping-display p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.left-only {
+    background-color: #ffcccc; /* Light red */
+}
+
+.right-only {
+    background-color: #ccffcc; /* Light green */
+}
+
+.common-diff {
+    background-color: #cce6ff; /* Light blue */
+}

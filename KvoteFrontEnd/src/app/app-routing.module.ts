@@ -19,6 +19,7 @@ import { UserComponent } from './admin-pannel/user/user.component';
 import { EmailVerificationComponent } from './landing-page/landing-page-reklama/email-verification/email-verification.component';
 import { ResetPasswordComponent } from './landing-page/landing-page-reklama/reset-password/reset-password.component';
 import { SurebetComponent } from './surebet/surebet.component';
+import { MappingComponent } from './admin-pannel/mapping/mapping.component'
 
 const routes: Routes = [
   {path:'', component: LandingPageComponent},
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent},
   { path: 'adminpannel', component: AdminPannelComponent},
   { path: 'user/:userName', component: UserComponent},
+  { path: 'mapping', component: MappingComponent},
   { path: 'surebet/:params', component: SurebetComponent}
 ];
 

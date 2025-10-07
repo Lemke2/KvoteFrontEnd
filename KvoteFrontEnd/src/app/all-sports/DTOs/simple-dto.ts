@@ -2,16 +2,15 @@ export interface SimpleMatch {
     id : string;
     sport : string;
     home: string;
+    homeId: number;
     away: string;
+    awayId: number;
     startTime: number;
-    league: string;
-    odds1: number;
-    oddsX: number;
-    odds2: number;
-    win1 : number;
-    win2 : number;
-    ftot1 : number;
-    ftot2 : number;
-    // other properties
+    leagueName: string;
+    K1: number;
+    KX: number;
+    K2: number;
+    FTOT1 : number;
+    FTOT2 : number;
   }
   

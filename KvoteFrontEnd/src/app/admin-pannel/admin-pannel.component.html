@@ -1,15 +1,18 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="content-container">
-    <div class="sidebar">
-      <!-- Search Bar Component -->
+    <!-- <div class="sidebar">
       <app-search-bar></app-search-bar>
       <br>
-      <!-- Smaller Table for Football Leagues -->
       <app-football-leagues></app-football-leagues>
-    </div>
+    </div> -->
 
     <div class="main-content">
+      <div class = "overlapping">
+        <input type="number" step="any" name="threshold" id="threshold" placeholder="Prag preklapanja" [(ngModel)]="overlappingThreshold">>
+        <button (click)="setThreshold(overlappingThreshold)">Submit</button>
+      </div>
+      <button class="btn btn-success" (click)="navigateToMapping()">Idi na Mappinge</button>
       <table>
         <thead>
           <tr>

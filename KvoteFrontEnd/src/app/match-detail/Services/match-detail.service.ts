@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MatchDetailService {
   private apiBaseUrl = environment.apiUrl;
-  private url = `${this.apiBaseUrl}/api/v1/full/match`;
+  private url = `${this.apiBaseUrl}/api/v1/all-sports/match`;
   private url2 = `${this.apiBaseUrl}/api/v1/surebet/get/`;
   private url3 = `${this.apiBaseUrl}/api/v1/surebet/specificOdds`;
 

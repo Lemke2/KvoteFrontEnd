@@ -1,0 +1,48 @@
+<app-nav-bar></app-nav-bar>
+<body>
+    <div class="main">
+        <div class="instructions">
+            <h2>Instrukcije:</h2>
+            Odaberite sport i unesite jedan ili vise Mappinga <br>
+            Onaj sa manjim datumom stavite sa leve strane<br>
+            Ako odaberete samo jedan stavite ge sa leve strane<br>
+            Unesite format u obliku 2025-08-30 inace mapping nece biti pronadjen<br>
+            Mozete uneti i format "now" da bi dobili sadasnji mapping<br>
+            <select [(ngModel)]="selectedSport" name="sport">
+            <option value="" disabled>Select a sport</option>
+            <option *ngFor="let sport of sports" [value]="sport">{{ sport }}</option>
+            </select>
+        </div>
+        
+        <div class="upload-section">
+            <div class="upload-box">
+                <h3>Left Mapping File</h3>
+                <input type="text" [(ngModel)]="date1" name="date1">
+                <button id="compare-btn" class="btn btn-success" (click)="GetFile1()">GetFile</button>
+            </div>
+            
+            <div class="upload-box">
+                <h3>Right Mapping File</h3>
+                <input type="text" [(ngModel)]="date2" name="date2">
+                <button id="compare-btn" class="btn btn-success" (click)="GetFile2()">GetFile</button>
+            </div>
+        </div>
+
+        <button id="compare-files-btn" class="compare-btn" (click)="compareMappings()">Compare Files</button>
+    
+        <div class="comparison-section" *ngIf="hasMappings()">
+            <div class="mapping-display" *ngIf="getMapping1Keys().length > 0">
+                <h3>Left Mapping ({{ date1 }})</h3>
+                <div *ngFor="let key of getMapping1Keys()" [ngClass]="getMapping1Class(key)">
+                    <p>{{ mapping1[key].values.join(',') }},{{ mapping1[key].name }}</p>
+                </div>
+            </div>
+            <div class="mapping-display" *ngIf="getMapping2Keys().length > 0">
+                <h3>Right Mapping ({{ date2 }})</h3>
+                <div *ngFor="let key of getMapping2Keys()" [ngClass]="getMapping2Class(key)">
+                    <p>{{ mapping2[key].values.join(',') }},{{ mapping2[key].name }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

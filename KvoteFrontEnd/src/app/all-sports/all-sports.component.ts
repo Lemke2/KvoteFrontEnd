@@ -207,23 +207,25 @@ export class AllSportsComponent {
       const matchUrl = "match/" + match.id;
       const thisMatch = match;
 
+      console.log(data);
+
       const oddsByHouse : Record<string, number> ={
-        'MaxBet': parseFloat(this.GetOdds(fullMatch, 'MaxBet', bettingGame)),
-        'Mozzart': parseFloat(this.GetOdds(fullMatch, 'Mozzart', bettingGame)),
-        'Admiral': parseFloat(this.GetOdds(fullMatch, 'Admiral', bettingGame)),
-        'Meridian': parseFloat(this.GetOdds(fullMatch, 'Meridian', bettingGame)),
-        'BalkanBet': parseFloat(this.GetOdds(fullMatch, 'BalkanBet', bettingGame)),
-        'BetOle': parseFloat(this.GetOdds(fullMatch, 'BetOle', bettingGame)),
-        'BrazilBet': parseFloat(this.GetOdds(fullMatch, 'BrazilBet', bettingGame)),
-        'Merkur': parseFloat(this.GetOdds(fullMatch, 'Merkur', bettingGame)),
-        'OktagonBet': parseFloat(this.GetOdds(fullMatch, 'OktagonBet', bettingGame)),
-        'PinnBet': parseFloat(this.GetOdds(fullMatch, 'PinnBet', bettingGame)),
-        'PlanetWin': parseFloat(this.GetOdds(fullMatch, 'PlanetWin', bettingGame)),
-        'SoccerBet' : parseFloat(this.GetOdds(fullMatch, 'SoccerBet', bettingGame)),
-        'SuperBet' : parseFloat(this.GetOdds(fullMatch, 'SuperBet', bettingGame))
+        'MaxBet': parseFloat(fullMatch['MaxBet']),
+        'Mozzart': parseFloat(fullMatch['Mozzart']),
+        'Admiral': parseFloat(fullMatch['Admiral']),
+        'Meridian': parseFloat(fullMatch['Meridian']),
+        'BalkanBet': parseFloat(fullMatch['BalkanBet']),
+        'BetOle': parseFloat(fullMatch['BetOle']),
+        'BrazilBet': parseFloat(fullMatch['BrazilBet']),
+        'Merkur': parseFloat(fullMatch['Merkur']),
+        'OktagonBet': parseFloat(fullMatch['OktagonBet']),
+        'PinnBet': parseFloat(fullMatch['PinnBet']),
+        'PlanetWin': parseFloat(fullMatch['PlanetWin']),
+        'SoccerBet' : parseFloat(fullMatch['SoccerBet']),
+        'SuperBet' : parseFloat(fullMatch['SuperBet'])
       };
 
-      // console.log(oddsByHouse);
+      console.log(oddsByHouse);
 
       const newOdds: MultiHouseOdds = {
         matchUrl,

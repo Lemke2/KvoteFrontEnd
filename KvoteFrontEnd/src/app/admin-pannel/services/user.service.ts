@@ -19,6 +19,9 @@ export class UserService {
   private apiUrl5 = `${this.apiBaseUrl}/api/v1/auth/registration-token`;
   private apiUrl6 = `${this.apiBaseUrl}/api/v1/auth/forgot-password`;
   private apiUrl7 = `${this.apiBaseUrl}/api/v1/auth/password-token`;
+  private apiUrl8 = `${this.apiBaseUrl}/api/v1/adminpannel/getpairingthreshold`;
+  private apiUrl9 = `${this.apiBaseUrl}/api/v1/adminpannel/setpairingthreshold`;
+  private apiUrl10 = `${this.apiBaseUrl}/api/v1/adminpannel/getPairingFile`;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -45,6 +48,14 @@ export class UserService {
       console.error('Token decoding failed', error);
       return "";
     }
+  }
+
+  isAdmin(): boolean {
+    const token = localStorage.getItem('authToken');
+    if (!token) return false;
+  
+    const decodedToken = jwtDecode(token) as { roles: string[] };
+    return decodedToken.roles[0].includes('ADMIN') ?? false;
   }
 
   updateTypeAndDurationOfPackage(
@@ -92,4 +103,15 @@ export class UserService {
     return this.httpClient.post<any>(this.apiUrl7, payload);
   }
 
+  getOverlapping() : Observable<number>{
+    return this.httpClient.get<number>(this.apiUrl8);
+  }
+
+  setThreshold(threshold: number): Observable<boolean> {
+    return this.httpClient.post<boolean>(`${this.apiUrl9}?target=${threshold}`, null);
+  }
+
+  getMappings(sport: string, date : string) : Observable<any>{
+    return this.httpClient.get<any>(`${this.apiUrl10}?sport=${sport}&date=${date}`)
+  }
 }

@@ -44,9 +44,9 @@
                 <div>{{ match.away }}</div>
               </a>
               </td>
-              <td (click)="addOddsToTicket(match, 'K1')" [ngClass]="{'selected': isSelected(match, 'K1')}"  class="odds-field">{{ match.odds1 }}</td>
-              <td (click)="addOddsToTicket(match, 'KX')" [ngClass]="{'selected': isSelected(match, 'KX')}"  class="odds-field">{{ match.oddsX }}</td>
-              <td (click)="addOddsToTicket(match, 'K2')" [ngClass]="{'selected': isSelected(match, 'K2')}"  class="odds-field">{{ match.odds2 }}</td>
+              <td (click)="addOddsToTicket(match, 'K1')" [ngClass]="{'selected': isSelected(match, 'K1')}"  class="odds-field">{{ match.K1 }}</td>
+              <td (click)="addOddsToTicket(match, 'KX')" [ngClass]="{'selected': isSelected(match, 'KX')}"  class="odds-field">{{ match.KX }}</td>
+              <td (click)="addOddsToTicket(match, 'K2')" [ngClass]="{'selected': isSelected(match, 'K2')}"  class="odds-field">{{ match.K2 }}</td>
             </tr>
           </tbody>
         </table>
@@ -84,9 +84,9 @@
                 <div>{{ match.match.away }}</div>
                 </a>
               </td>
-              <td (click)="addOddsToTicket(match.match, 'K1')" [ngClass]="{'selected': isSelected(match, 'K1')}" class="odds-field">{{ match.match.odds1 }}</td>
-              <td (click)="addOddsToTicket(match.match, 'KX')" [ngClass]="{'selected': isSelected(match, 'KX')}" class="odds-field">{{ match.match.oddsX }}</td>
-              <td (click)="addOddsToTicket(match.match, 'K2')" [ngClass]="{'selected': isSelected(match, 'K2')}" class="odds-field">{{ match.match.odds2 }}</td>
+              <td (click)="addOddsToTicket(match.match, 'K1')" [ngClass]="{'selected': isSelected(match, 'K1')}" class="odds-field">{{ match.match.K1 }}</td>
+              <td (click)="addOddsToTicket(match.match, 'KX')" [ngClass]="{'selected': isSelected(match, 'KX')}" class="odds-field">{{ match.match.KX }}</td>
+              <td (click)="addOddsToTicket(match.match, 'K2')" [ngClass]="{'selected': isSelected(match, 'K2')}" class="odds-field">{{ match.match.K2 }}</td>
             </tr>
           </tbody>
         </table>

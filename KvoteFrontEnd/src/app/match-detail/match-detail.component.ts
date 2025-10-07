@@ -7,7 +7,9 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BettingServiceService } from '../betting-ticket/betting-service.service';
 import { MultiHouseOdds } from '../betting-ticket/Odds';
 import {Location} from '@angular/common';
-import { filter, Subscription, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, Subscription, switchMap } from 'rxjs';
+import { UserService } from '../admin-pannel/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-match-detail',
@@ -15,8 +17,17 @@ import { filter, Subscription, switchMap } from 'rxjs';
   styleUrls: ['./match-detail.component.css']
 })
 export class MatchDetailComponent {
+  private apiBaseUrl = environment.apiUrl;
   match : any
   simpleMatch !: SimpleMatch
+  searchTerm : string = '';
+  searchBettingHouse : string = '';
+  searchResults: SimpleMatch[] = [];
+  bettingHouses = [
+    'MaxBet', 'Mozzart', 'Admiral', 'Meridian', 'BalkanBet',
+    'BetOle', 'BrazilBet', 'Merkur', 'OktagonBet', 'PinnBet',
+    'PlanetWin', 'SoccerBet', 'SuperBet'
+  ];
   footballGroupings : any
   toggleGroupings : {[key: string] : boolean} = {
     "Konacan Ishod": false,
@@ -41,6 +52,7 @@ export class MatchDetailComponent {
 
   constructor(private matchDetailService : MatchDetailService, 
               private sharedDataService: SharedDataService, 
+              public userService : UserService,
               private httpClient: HttpClient, 
               private bettingService: BettingServiceService, 
               private router: Router,
@@ -154,28 +166,36 @@ export class MatchDetailComponent {
     );
   }
 
-  getHandicapValues(odds: any): Record<number, (number|string)[]> {
-    // console.log(this.match['Admiral']['under']);
+  getHandicapValues(odds: any): {key: string, values: (number|string)[]}[] {
     const bettingHouses = ['MaxBet', 'Mozzart', 'Admiral', 'Meridian', 'BalkanBet', 'BetOle', 'BrazilBet', 'Merkur', 'OktagonBet', 'PinnBet', 'PlanetWin', 'SoccerBet', 'SuperBet'];
     let betValues: Record<number, (number|string)[]> = {};
 
+    // Collect all handicap values
     bettingHouses.forEach(bettingHouse => {
         const houseOdds = this.match[bettingHouse]?.[odds];
         if (typeof houseOdds === 'object' && houseOdds !== null) {
-          // console.log(this.match[bettingHouse][odds]);
-          for (let sbv in houseOdds){
-            this.match[bettingHouse][odds][Number(sbv)] = this.match[bettingHouse][odds][sbv];
-            betValues[Number(sbv)] = []
-          }
+            for (let sbv in houseOdds) {
+                betValues[Number(sbv)] = [];
+            }
         }
     });
-    // console.log(betValues);
-    const snapShotSBVs: number[] = Object.keys(betValues).map(Number);
-    // console.log(snapShotSBVs);
-    bettingHouses.forEach(bettingHouse => {
-        snapShotSBVs.forEach(sbv => {
+
+    // Get all handicap values and sort them by absolute value
+    const sortedEntries = Object.keys(betValues)
+        .map(Number)
+        .sort((a, b) => {
+            const absA = Math.abs(a);
+            const absB = Math.abs(b);
+            if (absA !== absB) return absA - absB;
+            return a - b;
+        });
+
+    // Populate the values in sorted order
+    sortedEntries.forEach(sbv => {
+        betValues[sbv] = [];
+        bettingHouses.forEach(bettingHouse => {
             if (this.match[bettingHouse] && odds in this.match[bettingHouse]) {
-                if(sbv in this.match[bettingHouse][odds]){
+                if (sbv in this.match[bettingHouse][odds]) {
                     betValues[sbv].push(Number(this.match[bettingHouse][odds][sbv]));
                 } else {
                     betValues[sbv].push('/');
@@ -185,8 +205,12 @@ export class MatchDetailComponent {
             }
         });
     });
-
-    return betValues;
+    
+    // Convert to array of objects to preserve order
+    return sortedEntries.map(key => ({
+        key: key.toString(),
+        values: betValues[key]
+    }));
   }
 
   getHighestOddsComplexBetType(input: (string | number)[]): number | null {
@@ -457,7 +481,7 @@ export class MatchDetailComponent {
 
 
   isSelected(match : any, bettingGame : string) : boolean{
-    return this.bettingService.isSelected(match._id, bettingGame);
+    return this.bettingService.isSelected(match.id, bettingGame);
   }
 
 
@@ -481,5 +505,74 @@ export class MatchDetailComponent {
     if(this.isMobile){
     this.bettingService.setShowTicket(false);
     }
+  }
+
+  search(bettingHouse: string, searchTerm : string) {
+    if (bettingHouse !in this.bettingHouses){
+      return;
+    }
+
+    if (searchTerm.length < 3){
+      return;
+    }
+    const url = `${this.apiBaseUrl}/api/v1/full/specificBettingHouseMatchList?bettingHouse=${bettingHouse}&sport=${this.match.sport}&query=${searchTerm}`;
+    
+
+    this.httpClient.get<SimpleMatch[]>(url)
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged()
+      )
+      .subscribe(results => {
+        this.searchResults = results;
+      }, error => {
+        console.error(`Search error for ${bettingHouse}:`, error);
+        this.searchResults = [];
+      });
+  }
+
+  onResultSelect(bettingHouse: string, result: SimpleMatch) {
+    const pinnHomeId = this.match.PinnBet.homeId;
+    const pinnAwayId = this.match.PinnBet.awayId;
+    const url = `${this.apiBaseUrl}/api/v1/full/updateMatchingForBettingHouse`;
+
+    this.httpClient.put(url, { sport : this.match.sport, 
+                              pinnbetId : this.match.id,
+                              pinnbetHomeId : pinnHomeId, 
+                              pinnbetAwayId : pinnAwayId, 
+                              bettingHouse : bettingHouse, 
+                              homeId: result.homeId,  
+                              awayId : result.awayId,
+                              bettingHouseId : result.id})
+      .subscribe(response => {
+        console.log(`Action response for ${bettingHouse}:`, response);
+        this.searchResults = [];
+        this.searchTerm = '';
+      }, error => {
+        console.error(`Action error for ${bettingHouse}:`, error);
+      });
+  }
+
+  RemoveMappingForBettingHouse(bettingHouse: string) {
+    const pinnHomeId = this.match.PinnBet.homeId;
+    const pinnAwayId = this.match.PinnBet.awayId;
+    const url = `${this.apiBaseUrl}/api/v1/full/updateMatchingForBettingHouse`;
+
+    this.httpClient.put(url, { sport : this.match.sport, 
+                              pinnbetId : this.match.id,
+                              pinnbetHomeId : pinnHomeId, 
+                              pinnbetAwayId : pinnAwayId, 
+                              bettingHouse : bettingHouse, 
+                              homeId: -1,  
+                              awayId : -1,
+                              bettingHouseId : null})
+      .subscribe(response => {
+        console.log(`Action response for ${bettingHouse}:`, response);
+        this.searchResults = [];
+        this.searchTerm = '';
+        location.reload();
+      }, error => {
+        console.error(`Action error for ${bettingHouse}:`, error);
+      });
   }
 }

@@ -44,8 +44,8 @@
                 <div>{{ match.away }}</div>
               </a>
               </td>
-              <td (click)="addOddsToTicket(match, 'FTOT1')" [ngClass]="{'selected': isSelected(match, 'FTOT1')}" class="odds-field">{{ match.ftot1 }}</td>
-              <td (click)="addOddsToTicket(match, 'FTOT2')" [ngClass]="{'selected': isSelected(match, 'FTOT2')}" class="odds-field">{{ match.ftot2 }}</td>
+              <td (click)="addOddsToTicket(match, 'FTOT1')" [ngClass]="{'selected': isSelected(match, 'FTOT1')}" class="odds-field">{{ match.FTOT1 }}</td>
+              <td (click)="addOddsToTicket(match, 'FTOT2')" [ngClass]="{'selected': isSelected(match, 'FTOT2')}" class="odds-field">{{ match.FTOT2 }}</td>
             </tr>
           </tbody>
         </table>
@@ -81,8 +81,8 @@
                 <div>{{ match.match.away }}</div>
                 </a>
               </td>
-              <td (click)="addOddsToTicket(match.match, 'FTOT1')" [ngClass]="{'selected': isSelected(match, 'FTOT1')}" class="odds-field">{{ match.match.ftot1 }}</td>
-              <td (click)="addOddsToTicket(match.match, 'FTOT2')" [ngClass]="{'selected': isSelected(match, 'FTOT2')}" class="odds-field">{{ match.match.ftot2 }}</td>
+              <td (click)="addOddsToTicket(match.match, 'FTOT1')" [ngClass]="{'selected': isSelected(match, 'FTOT1')}" class="odds-field">{{ match.match.FTOT1 }}</td>
+              <td (click)="addOddsToTicket(match.match, 'FTOT2')" [ngClass]="{'selected': isSelected(match, 'FTOT2')}" class="odds-field">{{ match.match.FTOT2 }}</td>
             </tr>
           </tbody>
         </table>

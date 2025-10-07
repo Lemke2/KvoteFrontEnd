@@ -35,6 +35,7 @@ import { BettingTicketComponent } from './betting-ticket/betting-ticket.componen
 import { EmailVerificationComponent } from './landing-page/landing-page-reklama/email-verification/email-verification.component';
 import { ResetPasswordComponent } from './landing-page/landing-page-reklama/reset-password/reset-password.component';
 import { SurebetComponent } from './surebet/surebet.component';
+import { MappingComponent } from './admin-pannel/mapping/mapping.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { SurebetComponent } from './surebet/surebet.component';
     BettingTicketComponent,
     EmailVerificationComponent,
     ResetPasswordComponent,
-    SurebetComponent
+    SurebetComponent,
+    MappingComponent
   ],
   imports: [
     BrowserModule,

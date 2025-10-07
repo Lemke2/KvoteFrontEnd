@@ -17,12 +17,29 @@
         <img src="/assets/images/close_w.png" alt="Close" class="close-icon" (click)="navigateBack()"/>
         <h1>{{ match.home }} vs {{ match.away }}</h1>
         <p>{{ match.startTime | date: 'medium' }}</p>
-        <p>{{ match.league}}</p>
+        <p>{{ match.leagueName}}</p>
       </div>
       
       <div class="table-responsive"> 
       <table>
         <thead>
+          <tr *ngIf="userService.isAdmin()">
+            <th colspan="4">
+              <select [(ngModel)]="searchBettingHouse">
+                <option value="" disabled selected>Select Betting House</option>
+                <option *ngFor="let house of bettingHouses" [value]="house">{{ house }}</option>
+              </select>
+            </th>
+            <th colspan="11">
+              <input type="text" [(ngModel)]="searchTerm" (input)="search(searchBettingHouse, searchTerm)"/>
+              <ul class="search-results" *ngIf="searchResults.length">
+                <li *ngFor="let result of searchResults" (click)="onResultSelect(searchBettingHouse, result)">
+                  {{ result.home }} - {{ result.away }}
+                </li>
+              </ul>
+              <button type="button" class="btn btn-danger" (click)="RemoveMappingForBettingHouse(searchBettingHouse)">Obrisi mapping za selektovanu kladionicu</button>
+            </th>
+          </tr>
           <tr>
             <th></th>
             <th class="MaxBet"><img src="assets/images/kladionice/MAXB_u.png" alt="MaxBet"/></th>
@@ -38,7 +55,7 @@
             <th class="PlanetWin"><img src="assets/images/kladionice/P365_u.png" alt="PlanetWin"/></th>
             <th class="SoccerBet"><img src="assets/images/kladionice/SOCC_u.png" alt="SoccerBet"/></th>
             <th class="SuperBet"><img src="assets/images/kladionice/SUPB_u.png" alt="SupperBet"/></th>
-            <th ></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -55,11 +72,11 @@
                   <ng-container *ngFor="let odds of getOdds(orderedKey, key)">
                     
                     <ng-container *ngIf="isComplexBetType(odds)">
-                      <ng-container *ngFor="let betValue of getHandicapValues(odds)| keyvalue">
+                      <ng-container *ngFor="let betValue of getHandicapValues(odds)">
                         <tr class="odds-row" [ngClass]="{'selected': isSelected(match, odds)  && selectedLimit === betValue.key}" (click)="addComplexOddsToTicket(odds, betValue.key)">
-                          <td>{{ odds }} ({{betValue.key}})</td>
-                          <ng-container *ngFor="let houseOdds of betValue.value; let i = index">
-                            <td [ngClass]="{'highlight-odds': getHighestOddsComplexBetType(betValue.value) === i}">{{ formatOdds(houseOdds) }}</td>
+                          <td>{{ odds }} ({{ betValue.key }})</td>
+                          <ng-container *ngFor="let houseOdds of betValue.values; let i = index">
+                            <td [ngClass]="{'highlight-odds': getHighestOddsComplexBetType(betValue.values) === i}">{{ formatOdds(houseOdds) }}</td>
                           </ng-container>
                           <td>{{ odds }} ({{betValue.key}})</td>
                         </tr>

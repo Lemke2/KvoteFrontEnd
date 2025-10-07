@@ -1,8 +1,38 @@
 {
     "Sve": {
         "Ukupno Poena": {
-            "over": "",
-            "under": ""
+            "P+": "",
+            "P-": ""
+        },
+
+        "Ukupno Asistencija": {
+            "A+": "",
+            "A-": ""
+        },
+
+        "Ukupno Skokova": {
+            "R+": "",
+            "R-": ""
+        },
+
+        "Poeni + Asistencije + Skokovi": {
+            "PRA+": "",
+            "PRA-": ""
+        },
+
+        "Poeni + Asistencije": {
+            "PA+": "",
+            "PA-": ""
+        },
+
+        "Poeni + Skokovi": {
+            "PA+": "",
+            "PA-": ""
+        },
+
+        "Asistencije + Skokovi": {
+            "RA+": "",
+            "RA-": ""
         }
     }
 }

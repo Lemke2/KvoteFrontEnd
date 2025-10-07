@@ -1,8 +1,13 @@
 {
     "Sve": {
-        "Konacan ishod uklj. produzetke": {
+        "Pobednik ukljucujuci produzetke": {
             "FTOT1": "",
             "FTOT2": ""
+        },
+        "Konacan ishod": {
+            "K1": "",
+            "KX": "",
+            "K2": ""
         },
         "Konacan ishod 1. poluvreme": {
             "p11": "",
@@ -53,6 +58,48 @@
         "Gost Poeni":{
             "G+" : "",
             "G-" : ""
+        },
+        "Par/Nepar":{
+            "PAR" : "",
+            "NEPAR" : ""
+        },
+        "Poluvreme sa najvise poena":{
+            "1. PO" : "",
+            "2. POL" : "",
+            "JEDNAKO" : ""
+        },
+        "Cetvrtina sa najvise poena":{
+            "1. CETVRTINA" : "",
+            "2. CETVRTINA" : "",
+            "3. CETVRTINA" : "",
+            "4. CETVRTINA" : "",
+            "JEDNAKO" : ""
+        },
+        "1. Cetvrtina pobednik":{
+            "1Q1" : "",
+            "1QX" : "",
+            "1Q2" : ""
+        },
+        "2. Cetvrtina pobednik":{
+            "2Q1" : "",
+            "2QX" : "",
+            "2Q2" : ""
+        },
+        "3. Cetvrtina pobednik":{
+            "3Q1" : "",
+            "3QX" : "",
+            "3Q2" : ""
+        },
+        "4. Cetvrtina pobednik":{
+            "4Q1" : "",
+            "4QX" : "",
+            "4Q2" : ""
+        },
+        "Hendikep 1. poluvreme domacin": {
+            "1PH1": ""
+        },
+        "Hednikep 1. poluvreme gost": {
+            "1PH2": ""
         }
     }
 }

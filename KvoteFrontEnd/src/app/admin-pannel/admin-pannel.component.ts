@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 export class AdminPannelComponent {
   
   users : User[] | undefined;
-  
+  overlappingThreshold : number = 0;
+
   constructor(private userService: UserService, private router: Router) {}
   
   ngOnInit(){
@@ -25,10 +26,27 @@ export class AdminPannelComponent {
         // console.error(error);
       }
     })
+
+    this.userService.getOverlapping().subscribe({
+      next: (data) => {
+        this.overlappingThreshold = data;
+      }
+    })
   }
 
   navigateToUser(user: User){
     this.router.navigate(['/user', user.userName]);
   }
 
+  setThreshold(threshold : number){
+    this.userService.setThreshold(threshold).subscribe({
+      next: (data) => {
+        console.log(data);
+      }
+    });
+  }
+
+  navigateToMapping(){
+    this.router.navigate(['/mapping']);
+  }
 }

@@ -41,30 +41,30 @@
                 <td *ngIf="leagueDetail.sport !== 'NFL' && leagueDetail.sport !== 'BasketballPlayers'" 
                   [ngClass]="{'selected': isSelected(match, 'K1')}" 
                   (click)="addOddsToTicket(match, 'K1')" 
-                  class="odds-field">{{ match.odds1 }}
+                  class="odds-field">{{ match.K1 }}
                </td>
 
               <td *ngIf="leagueDetail.sport !== 'NFL' && leagueDetail.sport !== 'BasketballPlayers' && leagueDetail.sport !== 'Tennis'" 
                   [ngClass]="{'selected': isSelected(match, 'KX')}"
                   (click)="addOddsToTicket(match, 'KX')" 
-                  class="odds-field">{{ match.oddsX }}
+                  class="odds-field">{{ match.KX }}
                 </td>
 
               <td *ngIf="leagueDetail.sport !== 'NFL' && leagueDetail.sport !== 'BasketballPlayers'" 
                   [ngClass]="{'selected': isSelected(match, 'K2')}" 
                   (click)="addOddsToTicket(match, 'K2')" 
-                  class="odds-field">{{ match.odds2 }}
+                  class="odds-field">{{ match.K2 }}
                 </td>
 
               <td *ngIf="leagueDetail.sport === 'NFL'" 
                   [ngClass]="{'selected': isSelected(match, 'FTOT1')}" 
                   (click)="addOddsToTicket(match, 'FTOT1')" 
-                  class="odds-field">{{ match.ftot1 }}
+                  class="odds-field">{{ match.FTOT1 }}
                 </td>
               <td *ngIf="leagueDetail.sport === 'NFL'" 
                   [ngClass]="{'selected': isSelected(match, 'FTOT2')}" 
                   (click)="addOddsToTicket(match, 'FTOT2')"
-                  class="odds-field">{{ match.ftot2 }}
+                  class="odds-field">{{ match.FTOT2 }}
                 </td>
             </tr>
             </tbody>
